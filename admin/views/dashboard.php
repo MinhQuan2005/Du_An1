@@ -7,6 +7,6 @@
 </head>
 <body>
 <h1>TRANG QUẢN TRỊ WEBSITE</h1>
-<a href=""><Button>Quản trị ...</Button></a>
+<a href=""><Button>Quản trị WEBSITE</Button></a>
 </body>
 </html>
