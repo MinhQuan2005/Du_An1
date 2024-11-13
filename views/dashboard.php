@@ -6,11 +6,8 @@
     <title>Trang quản trị</title>
 </head>
 <body>
-<h1>TRANG QUẢN TRỊ WEBSITE</h1>
-<a href=""><Button>QUẢN LÝ DANH MỤC</Button></a>
-<a href=""><Button>QUẢN LÝ SẢN PHẨM</Button></a>
-<a href=""><Button>QUẢN LÝ ĐƠN HÀNG</Button></a>
-<a href=""><Button>QUẢN LÝ BÌNH LUẬN</Button></a>
-<a href=""><Button>QUẢN LÝ NGƯỜI DÙNG</Button></a>
+<h1>TRANG CHỦ</h1>
+<a href=""><Button>ĐĂNG NHẬP</Button></a>
+<a href=""><Button>ĐĂNG XUẤT</Button></a>
 </body>
 </html>
