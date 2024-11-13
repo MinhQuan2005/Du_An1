@@ -1,7 +1,7 @@
 <?php
 class dashboardController{
     function dashboard(){
-        require_once 'views/dashboard.php';
+        require_once 'views/client/dashboard.php';
     }
 }
 ?>
