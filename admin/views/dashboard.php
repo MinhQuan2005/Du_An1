@@ -6,7 +6,7 @@
     <title>Trang quản trị</title>
 </head>
 <body>
-<h1>TRANG QUẢN TRỊ WEBSITE</h1>
+<h1>TRANG QUẢN TRỊ WEBSITE - ADMIN</h1>
 <a href=""><Button>NÚT QUẢN TRỊ</Button></a>
 </body>
 </html>
