@@ -3,11 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang quản trị</title>
+    <title>TRANG CHỦ</title>
+    <link rel="stylesheet" href="css/client/dashboard.css">
 </head>
 <body>
-<h1>TRANG CHỦ</h1>
-<a href=""><Button>ĐĂNG NHẬP</Button></a>
-<a href=""><Button>ĐĂNG XUẤT</Button></a>
+    <div id="main">
+        <header id="header">
+            <div class="top-header">
+                <div class="menu">
+                    <ul>
+                        <li><a href="#">MỚI & NỔI BẬT</a></li>
+                        <li><a href="#">NAM</a></li>
+                        <li><a href="#">NỮ</a></li>
+                        <li><a href="#">TRẺ EM</a></li>
+                    </ul>
+                </div>
+
+                <div class="search">
+                    <form>
+                        <input type="text" placeholder="Nhập thông tin..." required>
+                        <button>Tìm kiếm</button>
+                    </form>
+                </div>
+
+                <div class="account">
+                    <?php if(isset($_SESSION['username'])) : ?>
+                        <span>Chào, <?php echo $_SESSION['username']; ?></span>
+                        <a href="#">Đăng xuất</a>
+                    <?php else : ?>
+                        <a href="#">Đăng nhập</a>
+                        <a href="#">Đăng ký</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="banner">
+                <img src="">
+            </div>
+        </header>
+    </div>
 </body>
 </html>
