@@ -115,7 +115,6 @@
     color: white;
 }
 
-#header .banner {
-    width: 100%;
-    height: auto;
+#footer {
+    background-color: #333;
 }
