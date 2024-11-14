@@ -117,4 +117,25 @@
 
 #footer {
     background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#footer p {
+    margin: 0;
+}
+
+.left-section {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.right-section {
+    flex-grow: 1;
+    text-align: right;
 }

@@ -56,15 +56,13 @@
 
         <footer id="footer">
             <div class="left-section">
-                <div class="contact-info">
                     <p><b>Địa chỉ: </b>FPT Polytechnic Hà Nội</p>
-                    <p><b>Liên hệ: </b>+977907877</p>
+                    <p><b>Hotline: </b>+212244314</p>
                     <p><b>Email: </b>contact@nhom4.com</p>
-                </div>
             </div>
 
             <div class="right-section">
-                <p>Copyright <b>&copy;</b> DA1 by Nhóm 4</p>
+                <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
                 <br>
                 <p><b>Chính sách bảo mật | Điều khoản sử dụng</b></p>
             </div>
