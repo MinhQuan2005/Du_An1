@@ -10,6 +10,11 @@
     <div id="main">
         <header id="header">
             <div class="top-header">
+
+                <div class="logo">
+                    NIKE
+                </div>
+
                 <div class="menu">
                     <ul>
                         <li><a href="#">MỚI & NỔI BẬT</a></li>
@@ -38,7 +43,7 @@
             </div>
 
             <div class="banner">
-                <img src="" alt="Banner">
+                BANNER
             </div>
         </header>
     </div>
