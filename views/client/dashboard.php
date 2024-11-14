@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRANG CHỦ</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/client/dashboard.css">
 </head>
 <body>
@@ -42,5 +43,10 @@
             </div>
         </header>
     </div>
+=======
+</head>
+<body>
+
+>>>>>>> 18e0ed203a3abe72b06ed10bd3fd1a6f71646347
 </body>
 </html>
