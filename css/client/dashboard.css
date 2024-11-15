@@ -1,0 +1,121 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+#main {
+    margin: auto;
+}
+
+#header .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px;
+}
+
+#header .menu ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+#header .menu li {
+    list-style: none;
+    position: relative;
+}
+
+#header .menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#header .menu li a:hover {
+    background: linear-gradient(135deg, white, white);
+    color: #333;
+    transform: scale(1.1);
+}
+
+#header .menu li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: width 0.3s ease;
+}
+
+#header .menu li a:hover::before {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #header .menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #header .menu li a {
+        padding: 10px;
+    }
+}
+
+#header .search input {
+    padding: 5px 10px;
+    margin: 0;
+    border: none;
+    border-radius: 5px;
+}
+
+#header .search button {
+    background-color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    margin-right: -1px;
+    border-radius: 5px;
+}
+
+#header .account {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#header .account span {
+    color: white;
+    font-size: 15px;
+}
+
+#header .account a {
+    text-decoration: none;
+    background-color: white;
+    color: #333;
+    font-size: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#header .account a:hover {
+    background-color: #333;
+    color: white;
+}
+
+#header .banner {
+    width: 100%;
+    height: auto;
+}
