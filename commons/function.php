@@ -1,8 +1,8 @@
 <?php
     function connectDB(){
-        $host="mysql:host=localhost;dbname=...;charset=utf8";
+        $host="mysql:host=localhost;dbname=x_shop;charset=utf8";
         $user="root";
-        $pass="";
+        $pass="123123";
         try {
             $conn=new PDO($host,$user,$pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
