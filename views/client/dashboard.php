@@ -10,6 +10,11 @@
     <div id="main">
         <header id="header">
             <div class="top-header">
+
+                <div class="logo">
+                    NIKE
+                </div>
+
                 <div class="menu">
                     <ul>
                         <li><a href="#">MỚI & NỔI BẬT</a></li>
@@ -38,9 +43,30 @@
             </div>
 
             <div class="banner">
-                <img src="" alt="Banner">
+                BANNER
             </div>
         </header>
+
+        <div id="content">
+            <h1>MỚI & NỔI BẬT</h1>
+            <h1>NAM</h1>
+            <h1>NỮ</h1>
+            <h1>TRẺ EM</h1>
+        </div>
+
+        <footer id="footer">
+            <div class="left-section">
+                    <p><b>Địa chỉ: </b>FPT Polytechnic Hà Nội</p>
+                    <p><b>Hotline: </b>+212244314</p>
+                    <p><b>Email: </b>contact@nhom4.com</p>
+            </div>
+
+            <div class="right-section">
+                <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
+                <br>
+                <p><b>Chính sách bảo mật | Điều khoản sử dụng</b></p>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
