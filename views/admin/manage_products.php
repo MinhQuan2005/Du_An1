@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $views = 0;
 
     if ($image) {
-        // Di chuyển file hình ảnh đến thư mục img
-        move_uploaded_file($image_tmp, "../img/" . $image);
+        // Di chuyển file hình ảnh đến thư mục uploads
+        move_uploaded_file($image_tmp, "../../uploads" . $image);
     }
 
     // Kiểm tra các trường bắt buộc
