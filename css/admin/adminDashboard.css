@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #343a40;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.menu {
+    width: 250px;
+    float: left;
+    margin-right: 20px;
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu ul li {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.menu ul li a {
+    display: block;
+    padding: 15px;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s, padding-left 0.3s;
+}
+
+.menu ul li a:hover {
+    background-color: #0056b3;
+    padding-left: 20px;
+}
+
+.content {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.content .alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.content .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.content .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.content form div {
+    margin-bottom: 10px;
+}
+
+.content form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.content form input[type="text"],
+.content form input[type="password"],
+.content form input[type="email"],
+.content form input[type="file"]
+.content form select,
+.content form textarea {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.content form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.content form button:hover {
+    background-color: #0056b3;
+}
+
+.content form button[type="submit"]:first-child {
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table th, table td {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+table img {
+    max-width: 60px;
+    border-radius: 6px;
+}
+
+.table-actions {
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+}
+
+table a {
+    color: black;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#list-container a {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+#list-container a:hover {
+    color: #fff;
+    background-color: #007bff;
+}
