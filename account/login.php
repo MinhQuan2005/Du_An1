@@ -8,11 +8,25 @@
     <link rel="stylesheet" href="../css/account/account.css">
     <title>ĐĂNG NHẬP</title>
 </head>
-
+<?php
+session_start(); 
+    if (isset($_SESSION['login_message'])) {
+        $message = $_SESSION['login_message'];
+        echo "<script>
+            var result = confirm('$message');
+            if (result) {
+                window.location.href = 'login.php';
+            } else {
+                window.location.href = 'login.php';
+            }
+        </script>";
+        unset($_SESSION['login_message']);
+    }
+    ?>
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form  method="POST">
+            <form  method="POST" action="../index.php?act=register">
                 <h1>Đăng ký</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -27,7 +41,7 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form  method="POST" action="login.php?act=login">
+            <form  method="POST" action="../index.php?act=login">
                 <h1>Đăng nhập</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -38,7 +52,6 @@
                 
                 <input type="text"  name="username" placeholder="Name" required>
                 <input type="password" name="password" placeholder="Password" required>   
-                <a href="#">Quên mật khẩu?</a>
                 <button type="submit" name="login">Đăng nhập</button>
             </form>
         </div>
