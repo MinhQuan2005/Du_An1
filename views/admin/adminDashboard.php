@@ -12,7 +12,7 @@
         <div class="menu">
             <ul>
                 <li><a href="../admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
-                <li><a href="#">QUẢN LÝ SẢN PHẨM</a></li>
+                <li><a href="../admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="#">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
