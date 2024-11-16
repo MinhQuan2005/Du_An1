@@ -1,8 +1,10 @@
 <?php
 // Require toàn bộ file Commons
- require_once './commons/function.php';
+require_once './commons/env.php';
+require_once './commons/function.php';
+
  // Require toàn bộ file Controllers
- require_once './controllers/client/dashboardController.php';
+require_once './controllers/client/dashboardController.php';
 
  // Require toàn bộ file Models
  
