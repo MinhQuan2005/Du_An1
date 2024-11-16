@@ -11,12 +11,10 @@ $is_admin = $_SESSION['user']['is_admin'] ?? 0;
 
 match ($act) {
     '/' => $is_admin ?
-        (new DashboardControllerAdmin())->dashboard() :
         (new dashboardController())->dashboard(),
     'register' => (new UserController())->register(),
     'login' => (new UserController())->login(),
     'logout' => (new UserController())->logout(),
-    'admin' => (new DashboardControllerAdmin())->dashboard(),
     'home' => (new dashboardController())->dashboard(),
     default => header("Location: account/login.php")
 };
