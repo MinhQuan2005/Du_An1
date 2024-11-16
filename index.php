@@ -1,17 +1,23 @@
 <?php
-// Require toàn bộ file Commons
- require_once './commons/function.php';
- // Require toàn bộ file Controllers
- require_once './controllers/client/dashboardController.php';
+require_once './commons/function.php';
+require_once './controllers/client/userController.php';
+require_once './controllers/admin/dashboardController.php';
+require_once './controllers/client/dashboardController.php';
 
- // Require toàn bộ file Models
- 
-
- // Route
 $act = $_GET['act'] ?? '/';
+
+session_start();
+$is_admin = $_SESSION['user']['is_admin'] ?? 0;
+
 match ($act) {
-    // Trang chủ quản trị
-    '/' => (new dashboardController)->dashboard(),
-    
-}
+    '/' => $is_admin ?
+        (new DashboardControllerAdmin())->dashboard() :
+        (new dashboardController())->dashboard(),
+    'register' => (new UserController())->register(),
+    'login' => (new UserController())->login(),
+    'logout' => (new UserController())->logout(),
+    'admin' => (new DashboardControllerAdmin())->dashboard(),
+    'home' => (new dashboardController())->dashboard(),
+    default => header("Location: account/login.php")
+};
 ?>

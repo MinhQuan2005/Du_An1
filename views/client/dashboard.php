@@ -32,12 +32,12 @@
                 </div>
 
                 <div class="account">
-                    <?php if(isset($_SESSION['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['username']; ?></span>
-                        <a href="#">Đăng xuất</a>
+                    <?php if(isset( $_SESSION['user']['username'])) : ?>
+                        <span>Chào,<?php echo $_SESSION['user']['username']; ?></span>
+                        <a href="index.php?act=logout">Đăng xuất</a>
                     <?php else : ?>
-                        <a href="#">Đăng nhập</a>
-                        <a href="#">Đăng ký</a>
+                        <a href="account/login.php">Đăng nhập</a>
+                       
                     <?php endif; ?>
                 </div>
             </div>
