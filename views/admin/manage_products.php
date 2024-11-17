@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($image) {
         // Di chuyển file hình ảnh đến thư mục uploads
-        move_uploaded_file($image_tmp, "../../uploads" . $image);
+        move_uploaded_file($image_tmp, "../../../Du an 1_Nhom 4/uploads" . $image);
     }
 
     // Kiểm tra các trường bắt buộc
@@ -75,13 +75,13 @@ if (isset($_GET['delete'])) {
         <h2>QUẢN LÝ SẢN PHẨM</h2>
         <div class="menu">
             <ul>
-                <li><a href="../admin/adminDashboard.php">BẢNG ĐIỀU KHIỂN</a></li>
-                <li><a href="../admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/adminDashboard.php">BẢNG ĐIỀU KHIỂN</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
                 <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
-                <li><a href="../admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
-                <li><a href="../../account/logout.php">ĐĂNG XUẤT</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
         <div class="content">
