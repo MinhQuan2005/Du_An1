@@ -27,6 +27,7 @@ match ($act) {
     'register' => (new UserController())->register(),
     'login' => (new UserController())->login(),
     'logout' => (new UserController())->logout(),
+    'admin' => (new adminDashboardController())->adminDashboard(),
     'home' => (new dashboardController())->dashboard(),
     default => header("Location: account/login.php")
 };
