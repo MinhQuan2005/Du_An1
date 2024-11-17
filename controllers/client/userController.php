@@ -14,7 +14,7 @@ class UserController {
         $host = 'localhost';
         $user="root";
         $db = 'x_shop';   
-        $pass = '123123';   
+        $pass = '0017'; 
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
