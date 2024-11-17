@@ -63,7 +63,7 @@ class UserController {
                 $_SESSION['login_message'] = "Đăng nhập thành công!";
     
                 if ($user['is_admin']) {
-                    header("Location: index.php?act=admin");
+                    header("Location: ../../../Du an 1_Nhom 4/views/admin/adminDashboard.php");
                 } else {
                     header("Location: index.php?act=home");
                 }
