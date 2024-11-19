@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = $_POST['price'];
     $categories_id = $_POST['categories_id'];
     $description = $_POST['description'];
+    $status = $_POST['status'];
     $image = $_FILES['image']['name'];
     $image_tmp = $_FILES['image']['tmp_name'];
-    
+
     $views = 0;
 
     if ($image) {
@@ -22,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Kiểm tra các trường bắt buộc
-    if (empty($name) || empty($price) || empty($categories_id)) {
+    if (empty($name) || empty($price) || empty($categories_id) || empty($status)) {
         $error = 'Các trường không được để trống';
     } else {
-        $sql = "INSERT INTO products (name, price, categories_id, description, image, views) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO products (name, price, categories_id, description, image, views, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sdissi", $name, $price, $categories_id, $description, $image, $views);
+        $stmt->bind_param("sdissis", $name, $price, $categories_id, $description, $image, $views, $status);
         if ($stmt->execute()) {
             $success = 'Thêm sản phẩm thành công';
         } else {
@@ -77,7 +78,7 @@ if (isset($_GET['delete'])) {
             <ul>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/adminDashboard.php">BẢNG ĐIỀU KHIỂN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
-                <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
@@ -100,16 +101,16 @@ if (isset($_GET['delete'])) {
 
                 <form action="manage_products.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
+                        <label for="products_id">ID SẢN PHẨM</label>
+                        <input type="text" name="products_id" value="auto number" disabled>
+                    </div>
+                    <div class="form-group">
                         <label for="name">TÊN SẢN PHẨM</label>
                         <input type="text" name="name" id="name" required>
                     </div>
                     <div class="form-group">
                         <label for="price">ĐƠN GIÁ</label>
                         <input type="text" name="price" id="price" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="image">HÌNH ẢNH</label>
-                        <input type="file" name="image" id="image">
                     </div>
                     <div class="form-group">
                         <label for="categories_id">LOẠI HÀNG</label>
@@ -124,6 +125,22 @@ if (isset($_GET['delete'])) {
                                 }
                             }
                             ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">HÌNH ẢNH</label>
+                        <input type="file" name="image" id="image">
+                    </div>
+                    <div class="form-group">
+                        <label for="views">LƯỢT XEM</label>
+                        <input type="text" name="views" value="auto number" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">TRẠNG THÁI</label>
+                        <select id="status" name="status" required>
+                            <option value="">Hiển thị trạng thái</option>
+                            <option value="Còn hàng">Còn hàng</option>
+                            <option value="Hết hàng">Hết hàng</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -149,6 +166,7 @@ if (isset($_GET['delete'])) {
                             <th>LOẠI HÀNG</th>
                             <th>HÌNH ẢNH</th>
                             <th>LƯỢT XEM</th>
+                            <th>TRẠNG THÁI</th>
                             <th>HÀNH ĐỘNG</th>
                         </tr>
                     </thead>
@@ -166,6 +184,7 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . htmlspecialchars($row['categories_id']) . "</td>";
                                 echo "<td><img src='../img/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['name']) . "' width='50'></td>";
                                 echo "<td>" . htmlspecialchars($row['views']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                                 echo "<td>
                                         <a href='update_manage_products.php?id=" . htmlspecialchars($row['products_id']) . "'>Sửa</a>
                                         <a href='manage_products.php?delete=" . htmlspecialchars($row['products_id']) . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá sản phẩm này?\")'>Xoá</a>

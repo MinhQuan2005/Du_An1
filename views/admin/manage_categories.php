@@ -5,36 +5,20 @@ include('../../commons/function.php');
 $error = '';
 $success = '';
 
+// Xử lý thêm danh mục
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Xử lý thêm hoặc cập nhật danh mục
-    if (isset($_POST['add_or_update_category'])) {
-        $name = $_POST['name'];
-        $id = $_POST['categories_id'] ?? null;
+    $name = $_POST['name'];
 
-        if (empty($name)) {
-            $error = 'Tên loại không được để trống';
+    if (empty($name)) {
+        $error = 'Tên danh mục không được để trống';
+    } else {
+        $sql = "INSERT INTO categories (name) VALUES (?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $name);
+        if ($stmt->execute()) {
+            $success = 'Thêm danh mục thành công';
         } else {
-            if ($id) {
-                // Cập nhật danh mục
-                $sql = "UPDATE categories SET name = ? WHERE categories_id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("si", $name, $id);
-                if ($stmt->execute()) {
-                    $success = 'Cập nhật loại thành công';
-                } else {
-                    $error = 'Lỗi khi cập nhật loại';
-                }
-            } else {
-                // Thêm mới danh mục
-                $sql = "INSERT INTO categories (name) VALUES (?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $name);
-                if ($stmt->execute()) {
-                    $success = 'Thêm loại thành công';
-                } else {
-                    $error = 'Lỗi khi thêm loại';
-                }
-            }
+            $error = 'Lỗi khi thêm danh mục';
         }
     }
 }
@@ -51,21 +35,28 @@ if (isset($_GET['delete'])) {
         $error = 'Lỗi khi xóa danh mục';
     }
 }
-
-// Lấy danh sách danh mục
-$sql = "SELECT * FROM categories";
-$result = $conn->query($sql);
-$categories = $result->fetch_all(MYSQLI_ASSOC);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUẢN LÝ DANH MỤC</title>
     <link rel="stylesheet" href="../../css/admin/adminDashboard.css">
+    <script>
+        function toggleCategoryList() {
+            var listContainer = document.getElementById('list-container');
+            if (listContainer.style.display === 'none') {
+                listContainer.style.display = 'block';
+            } else {
+                listContainer.style.display = 'none';
+            }
+        }
+    </script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <h2>QUẢN LÝ DANH MỤC</h2>
@@ -73,7 +64,7 @@ $categories = $result->fetch_all(MYSQLI_ASSOC);
             <ul>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/adminDashboard.php">BẢNG ĐIỀU KHIỂN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
-                <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
@@ -81,74 +72,71 @@ $categories = $result->fetch_all(MYSQLI_ASSOC);
             </ul>
         </div>
         <div class="content">
-            <?php if ($error): ?>
-                <div class="alert alert-danger">
-                    <?php echo $error; ?>
-                </div>
-            <?php endif; ?>
+            <div class="form-container">
+                <?php if ($error) : ?>
+                    <div class="alert alert-danger">
+                        <?php echo htmlspecialchars($error); ?>
+                    </div>
+                <?php endif; ?>
 
-            <?php if ($success): ?>
-                <div class="alert alert-success">
-                    <?php echo $success; ?>
-                </div>
-            <?php endif; ?>
+                <?php if ($success) : ?>
+                    <div class="alert alert-success">
+                        <?php echo htmlspecialchars($success); ?>
+                    </div>
+                <?php endif; ?>
 
-            <!-- Form thêm hoặc sửa -->
-            <form action="manage_categories.php" method="POST">
-                <div class="form-group">
-                    <label for="categories_id">ID DANH MỤC</label>
-                    <input type="text" name="categories_id" id="categories_id" value="" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="name">TÊN DANH MỤC</label>
-                    <input type="text" name="name" id="name" required>
-                </div>
-                <div>
-                    <button type="submit" name="add_or_update_category">Lưu</button>
-                    <button type="reset" onclick="resetForm()">Nhập lại</button>
-                </div>
-            </form>
+                <form action="manage_categories.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">ID DANH MỤC</label>
+                        <input type="text" name="categories_id" value="auto number" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">TÊN DANH MỤC</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Thêm mới</button>
+                        <button type="reset">Nhập lại</button>
+                        <button type="button" onclick="toggleCategoryList()">Danh sách</button>
+                    </div>
+                </form>
+            </div>
 
-            <!-- Danh sách danh mục -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID DANH MỤC</th>
-                        <th>TÊN DANH MỤC</th>
-                        <th>HÀNH ĐỘNG</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($categories)): ?>
-                        <?php foreach ($categories as $category): ?>
-                            <tr>
-                                <td><?php echo $category['categories_id']; ?></td>
-                                <td><?php echo $category['name']; ?></td>
-                                <td>
-                                    <button onclick="editCategory(<?php echo $category['categories_id']; ?>, '<?php echo $category['name']; ?>')">Sửa</button>
-                                    <a href="manage_categories.php?delete=<?php echo $category['categories_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr><td colspan="3">Không có danh mục nào.</td></tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+            <div id="list-container" style="display: none;" class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID DANH MỤC</th>
+                            <th>TÊN DANH MỤC</th>
+                            <th>HÀNH ĐỘNG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT * FROM categories";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['categories_id']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                                echo "<td>
+                                        <a href='update_manage_products.php?id=" . htmlspecialchars($row['categories_id']) . "'>Sửa</a>
+                                        <a href='manage_categories.php?delete=" . htmlspecialchars($row['categories_id']) . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá danh mục này?\")'>Xoá</a>
+                                      </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>Không có danh mục nào.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <script>
-        function editCategory(id, name) {
-            document.getElementById('categories_id').value = id;
-            document.getElementById('name').value = name;
-        }
-
-        function resetForm() {
-            document.getElementById('categories_id').value = '';
-            document.getElementById('name').value = '';
-        }
-    </script>
 </body>
+
 </html>
 
 <?php $conn->close(); ?>
