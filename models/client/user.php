@@ -6,11 +6,12 @@ class User {
         $this->pdo = $pdo;
     }
 
-    public function register($username, $email, $password) {
+    public function register($name, $username, $email, $password, $phone, $address) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        return $stmt->execute([$username, $email, $passwordHash]);
+        $stmt = $this->pdo->prepare("INSERT INTO users (name, username, email, password, phone, address) VALUES (?, ?, ?, ?, ?, ?)");
+        return $stmt->execute([$name, $username, $email, $passwordHash, $phone, $address]);
     }
+    
 
     public function login($username, $password) {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ?");

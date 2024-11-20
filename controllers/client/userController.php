@@ -1,5 +1,4 @@
 <?php
-
 require_once './models/client/user.php';
 require_once './commons/function.php';
 
@@ -38,10 +37,13 @@ class UserController {
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
+            $name = $_POST['name'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
 
-            if ($this->userModel->register($username, $email, $password)) {
+            if ($this->userModel->register($name,$username, $email, $password,$phone,$address)) {
                 header("Location: account/login.php");
                 exit();
             } else {
@@ -61,7 +63,6 @@ class UserController {
                 session_start();
                 $_SESSION['user'] = $user;
                 $_SESSION['login_message'] = "Đăng nhập thành công!";
-    
                 if ($user['is_admin']) {
                     header("Location: ../../../Du an 1_Nhom 4/views/admin/adminDashboard.php");
                 } else {
@@ -76,8 +77,6 @@ class UserController {
             }
         }
     }
-    
-
     public function logout() {
         session_start();
         session_destroy();

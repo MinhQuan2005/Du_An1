@@ -1,28 +1,36 @@
 <?php
-// Require toàn bộ file commons
-require_once './commons/env.php'; // Khai báo biến môi trường
-require_once './commons/function.php'; // Hàm hỗ trợ
-
+session_start();
+//Require toàn bộ file commons
+require_once './commons/env.php'; 
+require_once './commons/function.php'; 
+require_once './commons/config.php';
 
 // Require toàn bộ file controllers
 require_once './controllers/client/dashboardController.php';
 require_once './controllers/admin/adminDashboardController.php';
 require_once './controllers/client/userController.php';
-require_once './controllers/client/dashboardController.php';
-
+require_once './controllers/client/productController.php';
 
 // Require toàn bộ file models
+require_once './models/client/categoryModel.php';
+require_once './models/client/productModel.php';
 
+// Phần show sản phẩm
+$productModel = new ProductModel($conn);
+$productController = new productController($productModel);
+$action = $_GET['act'] ?? 'home';
+if ($action == 'home') {
+    $productController->index();
+}
 
-// Route
+// Xử lý route với match
 $act = $_GET['act'] ?? '/';
 
-session_start();
 $is_admin = $_SESSION['user']['is_admin'] ?? 0;
 
 match ($act) {
     '/' => $is_admin ? 
-        (new adminDashboardController): 
+        (new adminDashboardController())->adminDashboard() : 
         (new dashboardController())->dashboard(),
     'register' => (new UserController())->register(),
     'login' => (new UserController())->login(),
