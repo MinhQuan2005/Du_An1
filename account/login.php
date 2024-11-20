@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/account/account.css">
+    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/account/account.css">
     <title>ĐĂNG NHẬP</title>
 </head>
 <?php
@@ -34,9 +34,12 @@ session_start();
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <input type="text"  name="username" placeholder="Name" required>
+                <input type="text"  name="username" placeholder="Username" required>
+                <input type="text"  name="name" placeholder="Name" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="phone" placeholder="Phone" required>
+                <input type="text" name="address" placeholder="Address" required>
                 <button type="submit" name="register">Đăng ký</button>
             </form>
         </div>
