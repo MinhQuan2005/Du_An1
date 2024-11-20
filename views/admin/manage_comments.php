@@ -11,7 +11,7 @@ if (isset($_GET['delete'])) {
     if ($stmt->execute()) {
         $success = 'Xóa bình luận thành công';
     } else {
-        $error = 'Lỗi khi xóa bình luận';
+        $error = 'Có lỗi xảy ra';
     }
 }
 ?>
@@ -34,7 +34,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/adminDashboard.php">BẢNG ĐIỀU KHIỂN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
-                <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>

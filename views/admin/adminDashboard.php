@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRANG QUẢN TRỊ</title>
-    <link rel="stylesheet" href="../../css/admin/adminDashboard.css">
+    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/admin/adminDashboard.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
-                <li><a href="#">QUẢN LÝ NGƯỜI DÙNG</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
