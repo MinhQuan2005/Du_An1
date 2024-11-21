@@ -21,7 +21,18 @@
             </ul>
         </div>
         <div class="content">
-            <p>Tại đây, bạn có thể quản lý các danh mục, sản phẩm, người dùng, bình luận, đơn hàng và xem thống kê, báo cáo.</p>
+            <p>
+                Chào mừng đến với trang quản trị của 4Fit Shop! <br><br>
+                Tại đây, bạn có thể: <br><br>
+                - Quản lý danh mục <br>
+                - Quản lý sản phẩm <br>
+                - Quản lý người dùng <br>
+                - Quản lý bình luận <br>
+                - Quản lý đơn hàng <br>
+                - Xem thống kê, báo cáo <br><br>
+                Chúc bạn có một trải nghiệm tuyệt vời! <br><br>
+                Copyright &copy; Dự án 1 by Nhóm 4.
+            </p>
         </div>
     </div>
 </body>
