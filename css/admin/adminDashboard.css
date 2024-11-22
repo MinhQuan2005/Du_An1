@@ -22,7 +22,7 @@ body {
 .dashboard-container h2 {
     font-size: 30px;
     margin-bottom: 20px;
-    color: #343a40;
+    color: #512da8;
     text-align: center;
     font-weight: bold;
     border-bottom: 3px solid #512da8;
@@ -108,7 +108,7 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #512da8;
+    background-color: #5868c2;
     color: white;
     cursor: pointer;
     margin-right: 10px;
