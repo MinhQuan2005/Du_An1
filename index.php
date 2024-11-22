@@ -14,7 +14,6 @@ require_once './controllers/client/productController.php';
 // Require toàn bộ file models
 require_once './models/client/categoryModel.php';
 require_once './models/client/productModel.php';
-
 // Phần show sản phẩm
 $productModel = new ProductModel($conn);
 $productController = new productController($productModel);
@@ -37,6 +36,7 @@ match ($act) {
     'logout' => (new UserController())->logout(),
     'admin' => (new adminDashboardController())->adminDashboard(),
     'home' => (new dashboardController())->dashboard(),
+    'detailpro' => $productController->detailPro($_GET['id']),
     default => header("Location: account/login.php")
 };
 ?>

@@ -7,11 +7,11 @@ class ProductModel {
         $this->db = $conn;
     }
     public function getProductsByCategory($CategoryId) {
-        $query = "SELECT products.* FROM products
+        $sql= "SELECT products.* FROM products
                   JOIN categories ON products.categories_id = categories.categories_id
                   WHERE categories.categories_id = ?";
     
-        $stmt = $this->db->prepare($query);
+        $stmt = $this->db->prepare($sql);
         $stmt->bind_param('i', $CategoryId); 
         $stmt->execute();
     
@@ -26,16 +26,20 @@ class ProductModel {
         }
         return $products;
     }
-    
-    
     public function getPopularProducts() {
-        $query = "SELECT * FROM products ORDER BY views DESC LIMIT 8";
-        $result = $this->db->query($query);
+        $sql = "SELECT * FROM products ORDER BY views DESC LIMIT 8";
+        $result = $this->db->query($sql);
         $products = [];
         while ($row = $result->fetch_assoc()) {
             $products[] = $row;
         }
         return $products;
     }
+    public function findProductById($id) {
+        $id = (int)$id;
+        $sql= "SELECT * FROM products WHERE products_id=$id";
+        return $this->db->query($sql)->fetch_assoc();
+    }
+    
 }
 ?>
