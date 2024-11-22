@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRANG CHỦ</title>
-    <link rel="stylesheet" href="./css/client/dashboard.css">
+    <title>Chi Tiết Sản Phẩm</title>
+    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/spct.css">
+    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/dashboard.css">
+
 </head>
 <body>
-    
-    <div id="main">
-        <header id="header">
+    <?php if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+    <header id="header">
             <div class="top-header">
                 <div class="logo">
                     <img src="./uploads/logo.png" alt="">
                 </div>
                 <div class="menu">
                     <ul>
-                        <li><a href="index.php?act=home">TRANG CHỦ</a></li>
+                        <li><a href="../../../Du an 1_Nhom 4/index.php?act=home">TRANG CHỦ</a></li>
                         <li><a href="#top">MỚI & NỔI BẬT</a></li>
                         <li><a href="#nam">NAM</a></li>
                         <li><a href="#nu">NỮ</a></li>
@@ -32,7 +36,7 @@
                 <div class="account">
                     <?php if(isset($_SESSION['user']['username'])) : ?>
                         <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
-                        <form action="index.php?act=logout" method="POST">
+                        <form action="../../../Du an 1_Nhom 4/index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
@@ -41,11 +45,11 @@
                 </div>
             </div>
 
-            <div class="banner-container">
+            <!-- <div class="banner-container">
                 <div class="slides">
-                    <div class="slide" style="background-image: url('./uploads/banner1.jpg')"></div>
-                    <div class="slide" style="background-image: url('./uploads/banner2.jpg')"></div>
-                    <div class="slide" style="background-image: url('./uploads/banner3.jpg')"></div>
+                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner1.jpg')"></div>
+                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner2.jpg')"></div>
+                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner3.jpg')"></div>
                 </div>
                 <button class="nav-button left" onclick="prevSlide()">&#10094;</button>
                 <button class="nav-button right" onclick="nextSlide()">&#10095;</button>
@@ -54,60 +58,57 @@
                     <div class="dot" onclick="currentSlide(1)"></div>
                     <div class="dot" onclick="currentSlide(2)"></div>
                 </div>
-            </div>
+            </div> -->
         </header>
-        <div id="content">
-            <section class="product-section">
-            <h2 id="top">Sản phẩm nổi bật</h2>
-            <div class="product-list">
-                <?php foreach ($popularProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>" >
-                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
-                    </div>
-                <?php endforeach; ?>
+    <div class="product-detail-container">
+        <div class="product-image">
+            <img src="../../../Du an 1_Nhom 4/uploads/<?=$productOne['image']?>" alt="Sản phẩm">
+        </div>
+        <div class="product-info">
+            <h1><?= $productOne['name']  ?></h1>
+            <p class='price'><?= $productOne['price']  ?></p>
+            <p class="description">
+            <?= $productOne['description']?>
+
+            </p>
+            <p>Lượt xem:<?= $productOne['views']?></p>
+            <div class="size-selection">
+                <p>Lựa chọn size:</p>
+                <button>35</button>
+                <button>36</button>
+                <button>37</button>
+                <button>38</button>
+                <button>39</button>
+                <button>40</button>
+                <button>41</button>
+                <button>42</button>
+            </div>
+            <div class="actions">
+                <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                <button class="buy-now">Mua ngay</button>
+            </div>
+        </div>
+    </div>
+    <div class="comments-section">
+        <h2>Bình luận</h2>
+        <?php if (isset($_SESSION['user']['username'])): ?>
+            <div class="comment-list">
+                <div class="comment">
+                    <p><strong>vuiqua:</strong> Sản phẩm rất tuyệt, đáng mua và trải nghiệm.</p>
+                </div>
+                <div class="comment">
+                    <p><strong>vuilam:</strong> Dù ở xa nhưng giao rất nhanh, chăm sóc khách hàng tốt, tư vấn nhiệt tình.</p>
                 </div>
             </div>
-        </section>
-        <section class="product-section">
-            <h2 id="nam">Nam</h2>
-            <div class="product-list">
-                <?php foreach ($menProducts as  $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        <section class="product-section">
-            <h2 id="nu">Nữ</h2>
-            <div class="product-list">
-                <?php foreach ($womenProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        <section class="product-section">
-            <h2 id="tre em">Trẻ em</h2>
-            <div class="product-list">
-                <?php foreach ( $kidsProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        </div>
-        <footer id="footer">
+            <form class="comment-form" method="POST" action="index.php?act=comment">
+                <input type="text" placeholder="Viết bình luận..." name="comment" required>
+                <button type="submit">Gửi</button>
+            </form>
+        <?php else : ?>
+            <p>Vui lòng <a href="../../../Du an 1_Nhom 4/account/login.php">đăng nhập</a> để xem và gửi bình luận.</p>
+        <?php endif; ?>
+    </div>
+    <footer id="footer">
             <div class="left-section">
                 <p><b>Địa chỉ: </b>FPT Polytechnic Hà Nội</p>
                 <p><b>Hotline: </b>+212244314</p>
