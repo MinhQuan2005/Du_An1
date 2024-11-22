@@ -5,7 +5,7 @@ include('../../commons/function.php');
 $error = '';
 $success = '';
 
-// Xử lý thêm người dùng
+// Thêm
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Xử lý xóa người dùng
+// Xoá
 if (isset($_GET['delete'])) {
     $users_id = $_GET['delete'];
     $sql = "DELETE FROM users WHERE users_id=?";
@@ -74,8 +74,8 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_categories.php">QUẢN LÝ DANH MỤC</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
-                <li><a href="#">QUẢN LÝ ĐƠN HÀNG</a></li>
-                <li><a href="#">THỐNG KÊ VÀ BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
+                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
