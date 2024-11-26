@@ -6,7 +6,7 @@ $error = '';
 $success = '';
 
 // Thêm
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['update_category'])) {
     $name = $_POST['name'];
 
     if (empty($name)) {
@@ -35,6 +35,25 @@ if (isset($_GET['delete'])) {
         $error = 'Lỗi khi xóa danh mục';
     }
 }
+
+// Cập nhật danh mục
+if (isset($_POST['update_category'])) {
+    $categories_id = $_POST['categories_id'];
+    $name = $_POST['name'];
+
+    if (empty($name)) {
+        $error = 'Tên danh mục không được để trống';
+    } else {
+        $sql = "UPDATE categories SET name=? WHERE categories_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $name, $categories_id);
+        if ($stmt->execute()) {
+            $success = 'Cập nhật danh mục thành công';
+        } else {
+            $error = 'Lỗi khi cập nhật danh mục';
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +73,29 @@ if (isset($_GET['delete'])) {
                 listContainer.style.display = 'none';
             }
         }
+
+        function editCategory(id, name) {
+            document.getElementById('category_id').value = id;
+            document.getElementById('category_name').value = name;
+            document.getElementById('categoryModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeCategoryModal() {
+            document.getElementById('categoryModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function showDeleteModal(id) {
+            document.getElementById('delete_category_id').value = id;
+            document.getElementById('deleteModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
     </script>
 </head>
 
@@ -67,7 +109,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -121,8 +163,8 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . htmlspecialchars($row['categories_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                                 echo "<td>
-                                        <a href='update_manage_products.php?id=" . htmlspecialchars($row['categories_id']) . "'>Sửa</a>
-                                        <a href='manage_categories.php?delete=" . htmlspecialchars($row['categories_id']) . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá danh mục này?\")'>Xoá</a>
+                                        <button onclick='editCategory(" . $row['categories_id'] . ", \"" . htmlspecialchars($row['name']) . "\")'>Sửa</button>
+                                        <button onclick='showDeleteModal(" . $row['categories_id'] . ")'>Xoá</button>
                                       </td>";
                                 echo "</tr>";
                             }
@@ -135,6 +177,36 @@ if (isset($_GET['delete'])) {
             </div>
         </div>
     </div>
+
+    <!-- Modal sửa danh mục -->
+    <div id="categoryModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Cập nhật danh mục</h3><br>
+        <form method="POST" action="manage_categories.php">
+            <input type="hidden" name="categories_id" id="category_id">
+            <div class="form-group">
+                <label for="category_name">Tên danh mục:</label>
+                <input type="text" name="name" id="category_name" required>
+            </div>
+            <br>
+            <button type="button" onclick="closeCategoryModal()">Đóng</button>
+            <button type="submit" name="update_category">Lưu</button>
+        </form>
+    </div>
+
+    <!-- Modal xoá danh mục -->
+    <div id="deleteModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Xoá danh mục</h3><br>
+        <p>Bạn có chắc muốn xoá danh mục này?</p><br>
+        <form method="GET" action="manage_categories.php">
+            <input type="hidden" name="delete" id="delete_category_id">
+            <button type="button" onclick="closeDeleteModal()">Hủy</button>
+            <button type="submit">Xác nhận</button>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="closeCategoryModal(); closeDeleteModal();" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
 </body>
 
 </html>

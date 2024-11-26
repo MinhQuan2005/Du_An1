@@ -15,32 +15,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $address = $_POST['address'];
     $is_admin = isset($_POST['is_admin']) ? 1 : 0;
 
-    // Kiểm tra các trường bắt buộc
     if (empty($username) || empty($email) || empty($password) || empty($name)) {
-        $error = 'Các trường không được để trống.';
+        $error = 'Các trường bắt buộc không được để trống';
     } else {
         $password_hashed = password_hash($password, PASSWORD_BCRYPT);
         $sql = "INSERT INTO users (username, email, password, name, phone, address, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssssi", $username, $email, $password_hashed, $name, $phone, $address, $is_admin);
         if ($stmt->execute()) {
-            $success = 'Thêm người dùng thành công.';
+            $success = 'Thêm người dùng thành công';
         } else {
-            $error = 'Lỗi khi thêm người dùng.';
+            $error = 'Lỗi khi thêm người dùng';
         }
     }
 }
 
-// Xoá
+// Xóa
 if (isset($_GET['delete'])) {
     $users_id = $_GET['delete'];
     $sql = "DELETE FROM users WHERE users_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $users_id);
     if ($stmt->execute()) {
-        $success = 'Xóa người dùng thành công.';
+        $success = 'Xóa người dùng thành công';
     } else {
-        $error = 'Lỗi khi xóa người dùng.';
+        $error = 'Lỗi khi xóa người dùng';
     }
 }
 ?>
@@ -62,6 +61,17 @@ if (isset($_GET['delete'])) {
                 listContainer.style.display = 'none';
             }
         }
+
+        function showDeleteModal(id) {
+            document.getElementById('delete_user_id').value = id;
+            document.getElementById('deleteModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
     </script>
 </head>
 
@@ -75,7 +85,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -165,8 +175,7 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
                                 echo "<td>" . ($row['is_admin'] == 1 ? 'Admin' : 'Khách') . "</td>";
                                 echo "<td>
-                                        <a href='update_manage_users.php?id=" . htmlspecialchars($row['users_id']) . "'>Sửa</a>
-                                        <a href='manage_users.php?delete=" . htmlspecialchars($row['users_id']) . "' onclick='return confirm(\"Bạn có chắc chắn muốn xóa người dùng này?\");'>Xóa</a>
+                                        <button onclick='showDeleteModal(" . $row['users_id'] . ")'>Xoá</button>
                                       </td>";
                                 echo "</tr>";
                             }
@@ -179,6 +188,20 @@ if (isset($_GET['delete'])) {
             </div>
         </div>
     </div>
+
+    <!-- Modal xoá người dùng -->
+    <div id="deleteModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Xoá người dùng</h3><br>
+        <p>Bạn có chắc muốn xoá người dùng này?</p><br>
+        <form method="GET" action="manage_users.php">
+            <input type="hidden" name="delete" id="delete_user_id">
+            <button type="button" onclick="closeDeleteModal()">Hủy</button>
+            <button type="submit">Xác nhận</button>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="closeDeleteModal();" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
 </body>
 
 </html>

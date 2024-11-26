@@ -2,14 +2,15 @@
 include('../../commons/config.php');
 include('../../commons/function.php');
 
-// Xoá
-if (isset($_GET['delete'])) {
-    $orders_id = $_GET['delete'];
-    $sql = "DELETE FROM orders WHERE orders_id=?";
+// Sửa
+if (isset($_POST['update_status'])) {
+    $orders_id = $_POST['orders_id'];
+    $status = $_POST['status'];
+    $sql = "UPDATE orders SET status=? WHERE orders_id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $orders_id);
+    $stmt->bind_param("si", $status, $orders_id);
     if ($stmt->execute()) {
-        $success = 'Xóa đơn hàng thành công';
+        $success = 'Cập nhật trạng thái thành công';
     } else {
         $error = 'Có lỗi xảy ra';
     }
@@ -36,7 +37,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -63,10 +64,7 @@ if (isset($_GET['delete'])) {
                             <th>SỐ ĐIỆN THOẠI</th>
                             <th>EMAIL</th>
                             <th>ĐỊA CHỈ</th>
-                            <th>ID NGƯỜI DÙNG</th>
-                            <th>ID SẢN PHẨM</th>
                             <th>NGÀY ĐẶT HÀNG</th>
-                            <th>TRẠNG THÁI</th>
                             <th>HÀNH ĐỘNG</th>
                         </tr>
                     </thead>
@@ -82,17 +80,14 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . $row['phone'] . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
-                                echo "<td>" . $row['users_id'] . "</td>";
-                                echo "<td>" . $row['products_id'] . "</td>";
                                 echo "<td>" . $row['order_date'] . "</td>";
-                                echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                                 echo "<td>
-                                        <a href='manage_orders.php?delete=" . $row['orders_id'] . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá đơn hàng này?\");'>Xoá</a>
+                                        <button onclick='editStatus(" . $row['orders_id'] . ", `" . htmlspecialchars($row['status']) . "`)'>Chi tiết</button>
                                       </td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='8'>Không có đơn hàng nào.</td></tr>";
+                            echo "<tr><td colspan='10'>Không có đơn hàng nào.</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -100,6 +95,39 @@ if (isset($_GET['delete'])) {
             </div>
         </div>
     </div>
+
+    <!-- Modal cập nhật trạng thái -->
+    <div id="statusModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Cập nhật trạng thái</h3><br>
+        <form method="POST" action="">
+            <input type="hidden" name="orders_id" id="orders_id">
+            <label for="status">Trạng thái:</label>
+            <input type="text" name="status" id="status" required>
+            <br><br>
+            <button type="button" onclick="closeModal()">Đóng</button>
+            <button type="submit" name="update_status">Lưu</button>
+        </form>
+    </div>
+
+    <!-- Overlay để làm mờ nền -->
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+    <script>
+        function editStatus(orderId, currentStatus) {
+            // Hiển thị modal và overlay
+            document.getElementById('statusModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            // Gán giá trị vào form
+            document.getElementById('orders_id').value = orderId;
+            document.getElementById('status').value = currentStatus;
+        }
+
+        function closeModal() {
+            // Ẩn modal và overlay
+            document.getElementById('statusModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
