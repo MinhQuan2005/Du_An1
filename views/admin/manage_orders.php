@@ -1,20 +1,6 @@
 <?php
 include('../../commons/config.php');
 include('../../commons/function.php');
-
-// Sửa
-if (isset($_POST['update_status'])) {
-    $orders_id = $_POST['orders_id'];
-    $status = $_POST['status'];
-    $sql = "UPDATE orders SET status=? WHERE orders_id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $status, $orders_id);
-    if ($stmt->execute()) {
-        $success = 'Cập nhật trạng thái thành công';
-    } else {
-        $error = 'Có lỗi xảy ra';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -43,18 +29,6 @@ if (isset($_POST['update_status'])) {
         </div>
 
         <div class="content">
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger">
-                    <?php echo htmlspecialchars($error); ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($success)) : ?>
-                <div class="alert alert-success">
-                    <?php echo htmlspecialchars($success); ?>
-                </div>
-            <?php endif; ?>
-
             <div id="list-container" class="table-container">
                 <table>
                     <thead>
@@ -82,8 +56,8 @@ if (isset($_POST['update_status'])) {
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
                                 echo "<td>" . $row['order_date'] . "</td>";
                                 echo "<td>
-                                        <button onclick='editStatus(" . $row['orders_id'] . ", `" . htmlspecialchars($row['status']) . "`)'>Chi tiết</button>
-                                      </td>";
+                                    <button onclick=\"window.location.href='order_details.php?order_id=" . $row['orders_id'] . "&status=" . urlencode($row['status']) . "'\">Chi tiết</button>
+                                    </td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -95,39 +69,6 @@ if (isset($_POST['update_status'])) {
             </div>
         </div>
     </div>
-
-    <!-- Modal cập nhật trạng thái -->
-    <div id="statusModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
-        <h3>Cập nhật trạng thái</h3><br>
-        <form method="POST" action="">
-            <input type="hidden" name="orders_id" id="orders_id">
-            <label for="status">Trạng thái:</label>
-            <input type="text" name="status" id="status" required>
-            <br><br>
-            <button type="button" onclick="closeModal()">Đóng</button>
-            <button type="submit" name="update_status">Lưu</button>
-        </form>
-    </div>
-
-    <!-- Overlay để làm mờ nền -->
-    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-
-    <script>
-        function editStatus(orderId, currentStatus) {
-            // Hiển thị modal và overlay
-            document.getElementById('statusModal').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-            // Gán giá trị vào form
-            document.getElementById('orders_id').value = orderId;
-            document.getElementById('status').value = currentStatus;
-        }
-
-        function closeModal() {
-            // Ẩn modal và overlay
-            document.getElementById('statusModal').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
-    </script>
 </body>
 
 </html>

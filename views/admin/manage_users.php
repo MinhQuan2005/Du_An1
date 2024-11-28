@@ -156,7 +156,6 @@ if (isset($_GET['delete'])) {
                             <th>EMAIL</th>
                             <th>SỐ ĐIỆN THOẠI</th>
                             <th>ĐỊA CHỈ</th>
-                            <th>VAI TRÒ</th>
                             <th>HÀNH ĐỘNG</th>
                         </tr>
                     </thead>
@@ -173,7 +172,6 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['phone']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
-                                echo "<td>" . ($row['is_admin'] == 1 ? 'Admin' : 'Khách') . "</td>";
                                 echo "<td>
                                         <button onclick='showDeleteModal(" . $row['users_id'] . ")'>Xoá</button>
                                       </td>";

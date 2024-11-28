@@ -36,7 +36,7 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Cập nhật danh mục
+// Sửa
 if (isset($_POST['update_category'])) {
     $categories_id = $_POST['categories_id'];
     $name = $_POST['name'];
@@ -206,7 +206,6 @@ if (isset($_POST['update_category'])) {
 
     <!-- Overlay -->
     <div id="overlay" onclick="closeCategoryModal(); closeDeleteModal();" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-
 </body>
 
 </html>

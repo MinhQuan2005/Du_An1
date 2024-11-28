@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BẢNG ĐIỀU KHIỂN</title>
     <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/admin/adminDashboard.css">
 </head>
+
 <body>
     <div class="dashboard-container">
         <h2>BẢNG ĐIỀU KHIỂN</h2>
@@ -36,4 +38,5 @@
         </div>
     </div>
 </body>
+
 </html>
