@@ -4,12 +4,10 @@ require_once './commons/function.php';
 
 class UserController {
     private $userModel;
-
     private $pdo;
 
 
     public function __construct() {
-        
         $host = 'localhost';
         $user="root";
         $db = 'x_shop';   

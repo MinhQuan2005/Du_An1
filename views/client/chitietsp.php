@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Sản Phẩm</title>
-    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/spct.css">
+    <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/sanphamct.css">
     <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/dashboard.css">
 
 </head>
@@ -34,31 +34,18 @@
                     </form>
                 </div>
                 <div class="account">
-                    <?php if(isset($_SESSION['user']['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
-                        <form action="../../../Du an 1_Nhom 4/index.php?act=logout" method="POST">
+                <?php if(isset($_SESSION['user']['username'])) : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
+                        <form action="index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <a href="account/login.php"><button>Đăng nhập</button></a>
+                        
                     <?php endif; ?>
                 </div>
             </div>
-
-            <!-- <div class="banner-container">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner1.jpg')"></div>
-                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner2.jpg')"></div>
-                    <div class="slide" style="background-image: url('../../../Du an 1_Nhom 4/uploads/banner3.jpg')"></div>
-                </div>
-                <button class="nav-button left" onclick="prevSlide()">&#10094;</button>
-                <button class="nav-button right" onclick="nextSlide()">&#10095;</button>
-                <div class="dots">
-                    <div class="dot active" onclick="currentSlide(0)"></div>
-                    <div class="dot" onclick="currentSlide(1)"></div>
-                    <div class="dot" onclick="currentSlide(2)"></div>
-                </div>
-            </div> -->
         </header>
     <div class="product-detail-container">
         <div class="product-image">
@@ -66,12 +53,12 @@
         </div>
         <div class="product-info">
             <h1><?= $productOne['name']  ?></h1>
-            <p class='price'><?= $productOne['price']  ?></p>
+            <p class='price'><?=$productOne['price']?>đ</p>
             <p class="description">
             <?= $productOne['description']?>
 
             </p>
-            <p>Lượt xem:<?= $productOne['views']?></p>
+            <p class="views">Lượt xem: <?= $productOne['views']?></p>
             <div class="size-selection">
                 <p>Lựa chọn size:</p>
                 <button>35</button>
@@ -84,26 +71,34 @@
                 <button>42</button>
             </div>
             <div class="actions">
-                <button class="add-to-cart">Thêm vào giỏ hàng</button>
-                <button class="buy-now">Mua ngay</button>
+                <!-- <button class="add-to-cart">Thêm vào giỏ hàng</button> -->
+            <form action="index.php?act=addToCart" method="POST">
+               <input type="hidden" name="product_id" value="<?=$productOne['products_id']; ?>">
+              <input type="hidden" name="quantity" value="1"> <!-- Thêm số lượng nếu cần -->
+              <button type="submit" class="add-to-cart">Thêm vào giỏ hàng</button>
+              <button type="submit" class="buy-now">Mua ngay</button>
+            </form>
+                
             </div>
         </div>
     </div>
     <div class="comments-section">
         <h2>Bình luận</h2>
         <?php if (isset($_SESSION['user']['username'])): ?>
-            <div class="comment-list">
+        <div class="comment-list">
+            <?php foreach ($comments as $comment): ?>
                 <div class="comment">
-                    <p><strong>vuiqua:</strong> Sản phẩm rất tuyệt, đáng mua và trải nghiệm.</p>
+                    <p><strong><?php echo htmlspecialchars($comment['username']); ?>:</strong> 
+                    <?php echo htmlspecialchars($comment['comment']); ?> 
+                    <span class="comment-time"><?php echo date('d/m/Y H:i',strtotime($comment['created_at'])); ?></span></p>
                 </div>
-                <div class="comment">
-                    <p><strong>vuilam:</strong> Dù ở xa nhưng giao rất nhanh, chăm sóc khách hàng tốt, tư vấn nhiệt tình.</p>
-                </div>
-            </div>
-            <form class="comment-form" method="POST" action="index.php?act=comment">
-                <input type="text" placeholder="Viết bình luận..." name="comment" required>
-                <button type="submit">Gửi</button>
-            </form>
+            <?php endforeach; ?>
+        </div>
+
+        <form class="comment-form" method="POST" action="index.php?act=addComment&id=<?= $productOne['products_id']; ?>">
+            <input type="text" placeholder="Viết bình luận..." name="comment" required>
+            <button type="submit">Gửi</button>
+        </form>
         <?php else : ?>
             <p>Vui lòng <a href="../../../Du an 1_Nhom 4/account/login.php">đăng nhập</a> để xem và gửi bình luận.</p>
         <?php endif; ?>
@@ -120,48 +115,5 @@
             </div>
         </footer>
     </div>
-    <script>
-        let currentIndex = 0;
-        const slides = document.querySelector('.slides');
-        const dots = document.querySelectorAll('.dot');
-        const totalSlides = dots.length;
-        let slideInterval;
-
-        function updateSlidePosition() {
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentIndex].classList.add('active');
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlidePosition();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlidePosition();
-        }
-
-        function currentSlide(index) {
-            currentIndex = index;
-            updateSlidePosition();
-        }
-
-        function startAutoSlide() {
-            slideInterval = setInterval(nextSlide, 2000); 
-        }
-
-        function stopAutoSlide() {
-            clearInterval(slideInterval);
-        }
-        startAutoSlide();
-
-        
-        const bannerContainer = document.querySelector('.banner-container');
-        bannerContainer.addEventListener('mouseenter', stopAutoSlide);
-        bannerContainer.addEventListener('mouseleave', startAutoSlide);
-
-    </script>
 </body>
 </html>

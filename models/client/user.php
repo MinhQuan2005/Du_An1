@@ -11,7 +11,6 @@ class User {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, username, email, password, phone, address) VALUES (?, ?, ?, ?, ?, ?)");
         return $stmt->execute([$name, $username, $email, $passwordHash, $phone, $address]);
     }
-    
 
     public function login($username, $password) {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ?");

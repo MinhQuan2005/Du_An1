@@ -17,10 +17,10 @@
                 <div class="menu">
                     <ul>
                         <li><a href="index.php?act=home">TRANG CHỦ</a></li>
-                        <li><a href="#top">MỚI & NỔI BẬT</a></li>
-                        <li><a href="#nam">NAM</a></li>
-                        <li><a href="#nu">NỮ</a></li>
-                        <li><a href="#tre em">TRẺ EM</a></li>
+                        <li><a href="">MỚI & NỔI BẬT</a></li>
+                        <li><a href="">NAM</a></li>
+                        <li><a href="">NỮ</a></li>
+                        <li><a href="">TRẺ EM</a></li>
                     </ul>
                 </div>
                 <div class="search">
@@ -30,13 +30,16 @@
                     </form>
                 </div>
                 <div class="account">
+
                     <?php if(isset($_SESSION['user']['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <form action="index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <a href="account/login.php"><button>Đăng nhập</button></a>
+                        
                     <?php endif; ?>
                 </div>
             </div>
@@ -76,7 +79,7 @@
                 <?php foreach ($menProducts as  $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
@@ -88,7 +91,7 @@
                 <?php foreach ($womenProducts as $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
@@ -100,7 +103,7 @@
                 <?php foreach ( $kidsProducts as $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
