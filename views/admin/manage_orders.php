@@ -1,19 +1,6 @@
 <?php
 include('../../commons/config.php');
 include('../../commons/function.php');
-
-// Xoá
-if (isset($_GET['delete'])) {
-    $orders_id = $_GET['delete'];
-    $sql = "DELETE FROM orders WHERE orders_id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $orders_id);
-    if ($stmt->execute()) {
-        $success = 'Xóa đơn hàng thành công';
-    } else {
-        $error = 'Có lỗi xảy ra';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -36,24 +23,12 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
 
         <div class="content">
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger">
-                    <?php echo htmlspecialchars($error); ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($success)) : ?>
-                <div class="alert alert-success">
-                    <?php echo htmlspecialchars($success); ?>
-                </div>
-            <?php endif; ?>
-
             <div id="list-container" class="table-container">
                 <table>
                     <thead>
@@ -63,10 +38,7 @@ if (isset($_GET['delete'])) {
                             <th>SỐ ĐIỆN THOẠI</th>
                             <th>EMAIL</th>
                             <th>ĐỊA CHỈ</th>
-                            <th>ID NGƯỜI DÙNG</th>
-                            <th>ID SẢN PHẨM</th>
                             <th>NGÀY ĐẶT HÀNG</th>
-                            <th>TRẠNG THÁI</th>
                             <th>HÀNH ĐỘNG</th>
                         </tr>
                     </thead>
@@ -82,17 +54,14 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . $row['phone'] . "</td>";
                                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
-                                echo "<td>" . $row['users_id'] . "</td>";
-                                echo "<td>" . $row['products_id'] . "</td>";
                                 echo "<td>" . $row['order_date'] . "</td>";
-                                echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                                 echo "<td>
-                                        <a href='manage_orders.php?delete=" . $row['orders_id'] . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá đơn hàng này?\");'>Xoá</a>
-                                      </td>";
+                                    <button onclick=\"window.location.href='order_details.php?order_id=" . $row['orders_id'] . "&status=" . urlencode($row['status']) . "'\">Chi tiết</button>
+                                    </td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='8'>Không có đơn hàng nào.</td></tr>";
+                            echo "<tr><td colspan='10'>Không có đơn hàng nào.</td></tr>";
                         }
                         ?>
                     </tbody>

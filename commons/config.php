@@ -12,5 +12,3 @@ $conn->set_charset("utf8");
 if ($conn->errno) {
     die("Lỗi thiết lập charset: " . $conn->error);
 }
-    
-?>
