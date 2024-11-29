@@ -20,7 +20,6 @@
                         <li><a href="?act=dmnam">NAM</a></li>
                         <li><a href="?act=dmnu">NỮ</a></li>
                         <li><a href="?act=dmtreem">TRẺ EM</a></li>
-                        
                     </ul>
                 </div>
                 <div class="search">
@@ -33,13 +32,16 @@
                 </div>
                 </div>
                 <div class="account">
+
                     <?php if(isset($_SESSION['user']['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <form action="index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <a href="account/login.php"><button>Đăng nhập</button></a>
+                        
                     <?php endif; ?>
                 </div>
             </div>
@@ -70,6 +72,14 @@
                 <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>" />
                 <p><?= htmlspecialchars($product['name']) ?></p>
                 <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
+                <?php foreach ($popularProducts as $product) : ?>
+                    <div class="product-card">
+                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>" >
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
+                        <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
+                    </div>
+                <?php endforeach; ?>
+                </div>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
@@ -81,10 +91,10 @@
         <section class="product-section">
             <h2 id="nam">Nam</h2>
             <div class="product-list">
-                <?php foreach ($menProducts as $product) : ?>
+                <?php foreach ($menProducts as  $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
@@ -96,7 +106,7 @@
                 <?php foreach ($womenProducts as $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
@@ -108,7 +118,7 @@
                 <?php foreach ( $kidsProducts as $product) : ?>
                     <div class="product-card">
                         <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><?= $product['name'] ?></p>
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
                     </div>
                 <?php endforeach; ?>
@@ -122,7 +132,7 @@
                 <p><b>Email: </b>contact@nhom4.com</p>
             </div>
             <div class="right-section">
-                <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
+                <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p> <br>
                 <p><b>Chính sách bảo mật | Điều khoản sử dụng</b></p>
             </div>
         </footer>

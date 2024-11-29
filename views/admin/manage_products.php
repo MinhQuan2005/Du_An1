@@ -68,6 +68,33 @@ if (isset($_GET['delete'])) {
                 listContainer.style.display = 'none';
             }
         }
+
+        function editProduct(id, name, price, categories_id, description, status) {
+            document.getElementById('product_id').value = id;
+            document.getElementById('product_name').value = name;
+            document.getElementById('product_price').value = price;
+            document.getElementById('product_categories_id').value = categories_id;
+            document.getElementById('product_description').value = description;
+            document.getElementById('product_status').value = status;
+            document.getElementById('productModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function showDeleteModal(id) {
+            document.getElementById('delete_product_id').value = id;
+            document.getElementById('deleteModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
     </script>
 </head>
 
@@ -81,7 +108,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -180,19 +207,19 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . htmlspecialchars($row['products_id']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['price']) . "</td>";
+                                echo "<td>" . number_format($row['price']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['categories_id']) . "</td>";
-                                echo "<td><img src='../img/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['name']) . "' width='50'></td>";
+                                echo "<td><img src='../../../Du an 1_Nhom 4/uploads/" . htmlspecialchars($row['image']) . "' width='100'></td>";
                                 echo "<td>" . htmlspecialchars($row['views']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                                 echo "<td>
-                                        <a href='update_manage_products.php?id=" . htmlspecialchars($row['products_id']) . "'>Sửa</a>
-                                        <a href='manage_products.php?delete=" . htmlspecialchars($row['products_id']) . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá sản phẩm này?\")'>Xoá</a>
+                                        <button onclick='editProduct(" . $row['products_id'] . ", \"" . htmlspecialchars($row['name']) . "\", \"" . htmlspecialchars($row['price']) . "\", \"" . htmlspecialchars($row['categories_id']) . "\", \"" . htmlspecialchars($row['description']) . "\", \"" . htmlspecialchars($row['status']) . "\")'>Sửa</button>
+                                        <button onclick='showDeleteModal(" . $row['products_id'] . ")'>Xoá</button>
                                       </td>";
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='8'>Không có sản phẩm nào.</td></tr>";
+                            echo "<tr><td colspan='9'>Không có sản phẩm nào.</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -200,6 +227,57 @@ if (isset($_GET['delete'])) {
             </div>
         </div>
     </div>
+
+    <!-- Modal sửa sản phẩm -->
+    <div id="productModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Cập nhật sản phẩm</h3><br>
+        <form method="POST" action="manage_products.php">
+            <input type="hidden" name="products_id" id="product_id">
+            <div class="form-group">
+                <label for="product_name">Tên sản phẩm:</label><br>
+                <input type="text" name="name" id="product_name" required>
+            </div><br>
+            <div class="form-group">
+                <label for="product_price">Đơn giá:</label><br>
+                <input type="text" name="price" id="product_price" required>
+            </div><br>
+            <div class="form-group">
+                <label for="product_categories_id">Loại hàng:</label><br>
+                <select name="categories_id" id="product_categories_id" required>
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
+                    <option value="3">Trẻ em</option>
+                </select>
+            </div><br>
+            <div class="form-group">
+                <label for="product_status">Trạng thái:</label><br>
+                <select name="status" id="product_status" required>
+                    <option value="Còn hàng">Còn hàng</option>
+                    <option value="Hết hàng">Hết hàng</option>
+                </select>
+            </div><br>
+            <div class="form-group">
+                <label for="product_description">Mô tả:</label><br>
+                <textarea name="description" id="product_description"></textarea>
+            </div><br>
+            <button type="button" onclick="closeProductModal()">Đóng</button>
+            <button type="submit" name="update_product">Lưu</button>
+        </form>
+    </div>
+
+    <!-- Modal xoá sản phẩm -->
+    <div id="deleteModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Xoá sản phẩm</h3><br>
+        <p>Bạn có chắc muốn xoá sản phẩm này?</p><br>
+        <form method="GET" action="manage_products.php">
+            <input type="hidden" name="delete" id="delete_product_id">
+            <button type="button" onclick="closeDeleteModal()">Hủy</button>
+            <button type="submit">Xác nhận</button>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="closeProductModal(); closeDeleteModal();" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
 </body>
 
 </html>

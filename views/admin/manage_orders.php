@@ -36,7 +36,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -53,7 +53,6 @@ if (isset($_GET['delete'])) {
                     <?php echo htmlspecialchars($success); ?>
                 </div>
             <?php endif; ?>
-
             <div id="list-container" class="table-container">
                 <table>
                     <thead>
@@ -67,6 +66,7 @@ if (isset($_GET['delete'])) {
                             <th>ID SẢN PHẨM</th>
                             <th>NGÀY ĐẶT HÀNG</th>
                             <th>TRẠNG THÁI</th>
+                            <th>NGÀY ĐẶT HÀNG</th>
                             <th>HÀNH ĐỘNG</th>
                         </tr>
                     </thead>
@@ -93,6 +93,14 @@ if (isset($_GET['delete'])) {
                             }
                         } else {
                             echo "<tr><td colspan='8'>Không có đơn hàng nào.</td></tr>";
+                                echo "<td>" . $row['order_date'] . "</td>";
+                                echo "<td>
+                                    <button onclick=\"window.location.href='order_details.php?order_id=" . $row['orders_id'] . "&status=" . urlencode($row['status']) . "'\">Chi tiết</button>
+                                    </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='10'>Không có đơn hàng nào.</td></tr>";
                         }
                         ?>
                     </tbody>

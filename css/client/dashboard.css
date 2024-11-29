@@ -8,6 +8,7 @@
 body {
     background-color: #f5f5f5;
     color: #333;
+    padding-top: 100px; 
 }
 
 header {
@@ -19,6 +20,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff; 
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    z-index:2000; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .logo {
@@ -132,35 +139,59 @@ header {
     background-color: #191a1a;
 }
 
-/* Tài khoản */
 .account {
-    margin-left: 20px;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    gap: 15px; 
 }
-
-.account span {
+.account button {
+    padding: 10px 20px;
     font-size: 16px;
-    color: #333;
-    margin-right: 10px;
+    background:#242222;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}   
+
+button.butt{
+    background-color: #fff;
+}
+button a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 18px;
 }
 
-
-.account a button,
+button a:hover {
+    background-color: #262727;
+}
+.account button a {
+    border: 1px solid #333; 
+    padding: 8px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.account button a:hover {
+    background-color: #495057;
+}
 .account form button {
     background-color: #141414;
     color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
-.account a button:hover,
 .account form button:hover {
     background-color: #262727;
+}
+.account a {
+    color:#141414;
+    text-decoration: none;
+}
+
+.account a:hover {
+    text-decoration: underline;
 }
 
 
@@ -329,13 +360,22 @@ h2:hover {
     background: #333333;
 }
 
-footer {
+#footer {
     background-color: #111;
-    color: #fff;
+    color: white;
+    padding: 10px;
     text-align: center;
-    padding: 10px;
-    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
-.left-section, .right-section {
-    padding: 10px;
+.left-section {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.right-section {
+    flex-grow: 1;
+    text-align: right;
 }

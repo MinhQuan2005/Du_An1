@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BẢNG ĐIỀU KHIỂN</title>
     <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/admin/adminDashboard.css">
 </head>
+
 <body>
     <div class="dashboard-container">
         <h2>BẢNG ĐIỀU KHIỂN</h2>
@@ -17,6 +19,7 @@
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_comments.php">QUẢN LÝ BÌNH LUẬN</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
                 <li><a href="../../../../Duan1/Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -36,4 +39,5 @@
         </div>
     </div>
 </body>
+
 </html>

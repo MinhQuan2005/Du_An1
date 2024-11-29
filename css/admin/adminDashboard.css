@@ -169,16 +169,54 @@ table a {
     border-collapse: collapse;
 }
 
-#list-container a {
-    display: inline-block;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
+button {
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 #list-container a:hover {
     color: #fff;
     background-color: #512da8;
+button:hover {
+    background-color: #512da8;
+    color: white;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+button[type="button"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background-color: #c82333;
+}
+
+#statusModal {
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
 }

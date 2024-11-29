@@ -34,13 +34,14 @@
                     </form>
                 </div>
                 <div class="account">
-                    <?php if(isset($_SESSION['user']['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
-                        <form action="../../../Du an 1_Nhom 4/index.php?act=logout" method="POST">
+                <?php if(isset($_SESSION['user']['username'])) : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
+                        <form action="index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
-                        <a href="account/login.php"><button>Đăng nhập</button></a>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
+                        <a href="account/login.php"><button>Đăng nhập</button></a> 
                     <?php endif; ?>
                 </div>
             </div>
@@ -70,11 +71,12 @@
             </div>
             <div class="actions">
                 <!-- <button class="add-to-cart">Thêm vào giỏ hàng</button> -->
-                <form action="./index.php?act=addToCart" method="GET">
-    <input type="hidden" name="product_id" value="<?=$productOne['products_id']; ?>">
-    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
-</form>
-                <button class="buy-now">Mua ngay</button>
+            <form action="index.php?act=addToCart" method="POST">
+               <input type="hidden" name="product_id" value="<?=$productOne['products_id']; ?>">
+              <input type="hidden" name="quantity" value="1"> <!-- Thêm số lượng nếu cần -->
+              <button type="submit" class="add-to-cart">Thêm vào giỏ hàng</button>
+              <button type="submit" class="buy-now">Mua ngay</button>
+            </form>
             </div>
         </div>
     </div>
