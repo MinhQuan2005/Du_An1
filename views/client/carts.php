@@ -73,7 +73,7 @@
                         $totalPrice += $itemTotalPrice; 
                     ?>
                         <tr>
-                            <td><?= $index + 1 ?></td>
+                        <td><?= $index + 1 ?></td>
                             <td><img src="./uploads/<?= $item['image'] ?>" class="img-fluid" style="width: 100px;"></td>
                             <td><?= $item['name'] ?></td>
                             <td><?= number_format($item['price'], 0, ',', '.') ?> VND</td>
@@ -127,7 +127,7 @@
             <p><b>Email:</b> contact@nhom4.com</p>
         </div>
         <div class="right-section">
-            <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
+        <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
             <p><b>Chính sách bảo mật | Điều khoản sử dụng</b></p>
         </div>
     </footer>
