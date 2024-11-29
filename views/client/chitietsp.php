@@ -41,8 +41,7 @@
                         </form>
                     <?php else : ?>
                         <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
-                        <a href="account/login.php"><button>Đăng nhập</button></a>
-                        
+                        <a href="account/login.php"><button>Đăng nhập</button></a> 
                     <?php endif; ?>
                 </div>
             </div>
@@ -78,7 +77,6 @@
               <button type="submit" class="add-to-cart">Thêm vào giỏ hàng</button>
               <button type="submit" class="buy-now">Mua ngay</button>
             </form>
-                
             </div>
         </div>
     </div>
