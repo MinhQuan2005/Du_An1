@@ -8,6 +8,7 @@
 body {
     background-color: #f5f5f5;
     color: #333;
+    padding-top: 100px; 
 }
 
 header {
@@ -19,6 +20,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff; 
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    z-index:2000; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .logo {
@@ -100,63 +107,91 @@ header {
 .search form {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
+    justify-content: center;
+    width: 100%; /* Chiếm toàn bộ chiều rộng container */
+    max-width: 500px; /* Đặt giới hạn tối đa */
+    margin: 20px auto; /* Căn giữa form */
 }
 
 .search input {
-    flex-grow: 1;
-    border: none;
-    padding: 8px;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    font-size: 16px;
+    height: 50px; /* Tăng chiều cao */
+    font-size: 16px; /* Tăng kích thước chữ */
+    padding: 0 15px; /* Thêm khoảng cách trong ô nhập liệu */
+    border-radius: 5px 0 0 5px; /* Góc bo tròn bên trái */
+    border: 1px solid #010000; /* Đường viền ô nhập */
+    flex-grow: 1; /* Đảm bảo ô nhập liệu chiếm tối đa không gian */
+
 }
 
 .search button {
-    background-color: #36363b;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 16px;
+    height: 50px; /* Chiều cao phù hợp với ô nhập */
+    font-size: 16px; /* Tăng kích thước chữ */
+    padding: 0 20px; /* Tăng kích thước vùng nhấn */
+    border: none; /* Loại bỏ viền */
+    background-color: #ff9800; /* Màu nền nút */
+    color: white; /* Màu chữ */
+    border-radius: 0 5px 5px 0; /* Góc bo tròn bên phải */
+    cursor: pointer; /* Thay đổi con trỏ thành kiểu nhấn */
+    transition: background-color 0.3s;
 }
 
 .search button:hover {
     background-color: #191a1a;
 }
 
-/* Tài khoản */
 .account {
-    margin-left: 20px;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    gap: 15px; 
 }
-
-.account span {
+.account button {
+    padding: 10px 20px;
     font-size: 16px;
-    color: #333;
-    margin-right: 10px;
+    background:#242222;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}   
+
+button.butt{
+    background-color: #fff;
+}
+button a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 18px;
 }
 
-
-.account a button,
+button a:hover {
+    background-color: #262727;
+}
+.account button a {
+    border: 1px solid #333; 
+    padding: 8px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.account button a:hover {
+    background-color: #495057;
+}
 .account form button {
     background-color: #141414;
     color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
-.account a button:hover,
 .account form button:hover {
     background-color: #262727;
+}
+.account a {
+    color:#141414;
+    text-decoration: none;
+}
+
+.account a:hover {
+    text-decoration: underline;
 }
 
 
@@ -224,7 +259,7 @@ header {
 }
 
 .dot.active {
-    background-color: #3d3c39; 
+    background-color: #3d3c39;
 }
 
 
@@ -248,8 +283,8 @@ header {
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 15px; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
     margin-top: 20px;
 }
 
@@ -264,7 +299,7 @@ header {
 
 .product-card img {
     width: 100%;
-    height: 250px; 
+    height: 250px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -275,24 +310,24 @@ header {
 }
 
 .product-card:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 @media (max-width: 1024px) {
     .product-list {
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .product-list {
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 480px) {
     .product-list {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 }
 
@@ -300,14 +335,14 @@ h2 {
     font-family: 'Arial', sans-serif;
     font-size: 2.5em;
     font-weight: bold;
-    color: #222; 
+    color: #222;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 20px;
     position: relative;
     padding: 10px 20px;
-    background: #f2f2f2; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    background: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: background 0.3s ease, color 0.3s ease;
 }
@@ -317,21 +352,30 @@ h2::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.1);
-    color: rgba(0, 0, 0, 0.1); 
+    color: rgba(0, 0, 0, 0.1);
     z-index: -1;
 }
 h2:hover {
-    color: #ffffff; 
-    background: #333333; 
+    color: #ffffff;
+    background: #333333;
 }
 
-footer {
+#footer {
     background-color: #111;
-    color: #fff;
+    color: white;
+    padding: 10px;
     text-align: center;
-    padding: 10px;
-    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
-.left-section, .right-section {
-    padding: 10px;
+.left-section {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.right-section {
+    flex-grow: 1;
+    text-align: right;
 }

@@ -4,16 +4,14 @@ require_once './commons/function.php';
 
 class UserController {
     private $userModel;
-
     private $pdo;
 
 
     public function __construct() {
-        
         $host = 'localhost';
         $user="root";
         $db = 'x_shop';   
-        $pass = '0017'; 
+        $pass = '123123'; 
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -62,7 +60,6 @@ class UserController {
             if ($user) {
                 session_start();
                 $_SESSION['user'] = $user;
-                $_SESSION['login_message'] = "Đăng nhập thành công!";
                 if ($user['is_admin']) {
                     header("Location: ../../../Du an 1_Nhom 4/views/admin/adminDashboard.php");
                 } else {

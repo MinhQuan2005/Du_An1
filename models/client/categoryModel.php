@@ -1,14 +1,13 @@
 <?php
 class CategoryModel {
-    private $db;
+    private $conn;
 
     public function __construct($conn) {
-        $this->db = $conn;
+        $this->conn = $conn;
     }
-
     public function getAllCategories() {
-        $query = "SELECT * FROM categories";
-        $stmt = $this->db->prepare($query);
+        $sql = "SELECT * FROM categories";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         if ($stmt->errorCode() != '00000') {

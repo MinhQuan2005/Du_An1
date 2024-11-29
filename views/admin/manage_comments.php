@@ -24,6 +24,18 @@ if (isset($_GET['delete'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUẢN LÝ BÌNH LUẬN</title>
     <link rel="stylesheet" href="../../css/admin/adminDashboard.css">
+    <script>
+        function showDeleteModal(id) {
+            document.getElementById('delete_comment_id').value = id;
+            document.getElementById('deleteModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
 </head>
 
 <body>
@@ -36,7 +48,7 @@ if (isset($_GET['delete'])) {
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_products.php">QUẢN LÝ SẢN PHẨM</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_users.php">QUẢN LÝ NGƯỜI DÙNG</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/views/admin/manage_orders.php">QUẢN LÝ ĐƠN HÀNG</a></li>
-                <li><a href="#">THỐNG KÊ & BÁO CÁO</a></li>
+                <li><a href="../../../Du an 1_Nhom 4/views/admin/statistics_reports.php">THỐNG KÊ & BÁO CÁO</a></li>
                 <li><a href="../../../Du an 1_Nhom 4/account/logout.php">ĐĂNG XUẤT</a></li>
             </ul>
         </div>
@@ -79,7 +91,7 @@ if (isset($_GET['delete'])) {
                                 echo "<td>" . $row['users_id'] . "</td>";
                                 echo "<td>" . $row['created_at'] . "</td>";
                                 echo "<td>
-                                        <a href='manage_comments.php?delete=" . $row['comments_id'] . "' onclick='return confirm(\"Bạn có chắc chắn muốn xoá bình luận này?\");'>Xoá</a>
+                                        <button onclick='showDeleteModal(" . $row['comments_id'] . ")'>Xoá</button>
                                       </td>";
                                 echo "</tr>";
                             }
@@ -92,6 +104,20 @@ if (isset($_GET['delete'])) {
             </div>
         </div>
     </div>
+
+    <!-- Modal xoá bình luận -->
+    <div id="deleteModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <h3>Xoá bình luận</h3><br>
+        <p>Bạn có chắc muốn xoá bình luận này?</p><br>
+        <form method="GET" action="manage_comments.php">
+            <input type="hidden" name="delete" id="delete_comment_id">
+            <button type="button" onclick="closeDeleteModal()">Hủy</button>
+            <button type="submit">Xác nhận</button>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="closeDeleteModal();" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
 </body>
 
 </html>
