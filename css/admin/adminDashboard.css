@@ -177,9 +177,7 @@ button {
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-#list-container a:hover {
-    color: #fff;
-    background-color: #512da8;
+
 button:hover {
     background-color: #512da8;
     color: white;

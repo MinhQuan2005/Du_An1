@@ -107,32 +107,28 @@ header {
 .search form {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%; /* Chiếm toàn bộ chiều rộng container */
-    max-width: 500px; /* Đặt giới hạn tối đa */
-    margin: 20px auto; /* Căn giữa form */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .search input {
-    height: 50px; /* Tăng chiều cao */
-    font-size: 16px; /* Tăng kích thước chữ */
-    padding: 0 15px; /* Thêm khoảng cách trong ô nhập liệu */
-    border-radius: 5px 0 0 5px; /* Góc bo tròn bên trái */
-    border: 1px solid #010000; /* Đường viền ô nhập */
-    flex-grow: 1; /* Đảm bảo ô nhập liệu chiếm tối đa không gian */
-
+    flex-grow: 1;
+    border: none;
+    padding: 8px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 16px;
 }
 
 .search button {
-    height: 50px; /* Chiều cao phù hợp với ô nhập */
-    font-size: 16px; /* Tăng kích thước chữ */
-    padding: 0 20px; /* Tăng kích thước vùng nhấn */
-    border: none; /* Loại bỏ viền */
-    background-color: #ff9800; /* Màu nền nút */
-    color: white; /* Màu chữ */
-    border-radius: 0 5px 5px 0; /* Góc bo tròn bên phải */
-    cursor: pointer; /* Thay đổi con trỏ thành kiểu nhấn */
-    transition: background-color 0.3s;
+    background-color: #36363b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .search button:hover {
@@ -259,7 +255,7 @@ button a:hover {
 }
 
 .dot.active {
-    background-color: #3d3c39;
+    background-color: #3d3c39; 
 }
 
 
@@ -283,8 +279,8 @@ button a:hover {
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px; 
     margin-top: 20px;
 }
 
@@ -299,7 +295,7 @@ button a:hover {
 
 .product-card img {
     width: 100%;
-    height: 250px;
+    height: 250px; 
     object-fit: cover;
     border-radius: 5px;
 }
@@ -310,24 +306,24 @@ button a:hover {
 }
 
 .product-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); 
 }
 
 @media (max-width: 1024px) {
     .product-list {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); 
     }
 }
 
 @media (max-width: 768px) {
     .product-list {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media (max-width: 480px) {
     .product-list {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; 
     }
 }
 
@@ -335,14 +331,14 @@ h2 {
     font-family: 'Arial', sans-serif;
     font-size: 2.5em;
     font-weight: bold;
-    color: #222;
+    color: #222; 
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 20px;
     position: relative;
     padding: 10px 20px;
-    background: #f2f2f2;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #f2f2f2; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     border-radius: 8px;
     transition: background 0.3s ease, color 0.3s ease;
 }
@@ -352,12 +348,12 @@ h2::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.1);
-    color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.1); 
     z-index: -1;
 }
 h2:hover {
-    color: #ffffff;
-    background: #333333;
+    color: #ffffff; 
+    background: #333333; 
 }
 
 #footer {

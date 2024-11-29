@@ -6,7 +6,6 @@ $error = '';
 $success = '';
 
 // Thêm
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['update_category'])) {
     $name = $_POST['name'];
 
