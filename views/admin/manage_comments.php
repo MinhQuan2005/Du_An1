@@ -11,7 +11,7 @@ if (isset($_GET['delete'])) {
     if ($stmt->execute()) {
         $success = 'Xóa bình luận thành công';
     } else {
-        $error = 'Có lỗi xảy ra';
+        $error = 'Lỗi khi xoá bình luận';
     }
 }
 ?>
