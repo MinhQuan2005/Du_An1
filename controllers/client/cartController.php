@@ -37,23 +37,18 @@ class CartController {
              window.location.href = '../../../Du an 1_Nhom 4/index.php?act=home';
             }
         </script>";
-            exit(); // Dừng lại không thực thi tiếp
+            exit(); 
         }
-    
         // Người dùng đã đăng nhập, lấy ID người dùng
         $userId = $_SESSION['user']['users_id'];
-    
         // Lấy các sản phẩm trong giỏ hàng của người dùng
         $cartItems = $this->cartModel->getCartItems($userId);
-        
         $totalPrice = 0;
-        foreach ($cartItems as $item) {
+        foreach ($cartItems as $item) { 
             // Tính tổng tiền cho từng sản phẩm trong giỏ hàng
             $item['total_price'] = $item['price'] * $item['quantity'];
             $totalPrice += $item['total_price']; // Cộng dồn tổng tiền
         }
-    
-        // Truyền dữ liệu giỏ hàng và tổng tiền vào view
         require_once './views/client/carts.php';
     }
    

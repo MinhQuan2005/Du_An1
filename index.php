@@ -11,6 +11,8 @@ require_once './controllers/admin/adminDashboardController.php';
 require_once './controllers/client/userController.php';
 require_once './controllers/client/productController.php';
 require_once './controllers/client/cartController.php';
+require_once './controllers/client/oderController.php';
+require_once './controllers/client/paymentController.php';
 
 // Require toàn bộ file models
 require_once './models/client/categoryModel.php';
@@ -46,6 +48,12 @@ match ($act) {
     'cart' => $cartController->viewAction(),
     'updateCart' => $cartController->updateAction(),
     'deleteFromCart' => $cartController->deleteAction(),
+
+    'checkout' => (new CheckoutController())->checkoutForm(),
+    'placeOrder' => (new CheckoutController())->placeOrder(),
+
+    'vnpayPayment' => (new paymentController())->processVNPay(),
+    'momoPayment' => (new paymentController())->processMoMo(),
     default => header("Location: account/login.php")
 };
 ?>

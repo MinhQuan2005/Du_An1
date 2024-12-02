@@ -58,5 +58,11 @@ class CartModel {
         }
         return $cart['carts_id'];
     }
+    public function clearCart($userId) {
+        $sql = "DELETE FROM cart_details WHERE carts_id = (SELECT carts_id FROM carts WHERE users_id = ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+    }
 }
 ?>
