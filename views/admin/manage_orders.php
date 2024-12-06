@@ -56,8 +56,8 @@ include('../../commons/function.php');
                                 echo "<td>" . htmlspecialchars($row['address']) . "</td>";
                                 echo "<td>" . $row['order_date'] . "</td>";
                                 echo "<td>
-                                    <button onclick=\"window.location.href='order_details.php?order_id=" . $row['orders_id'] . "&status=" . urlencode($row['status']) . "'\">Chi tiết</button>
-                                    </td>";
+                                <button onclick=\"window.location.href='order_details.php?order_id=" . $row['orders_id'] . "&status=" . urlencode($row['status'] ?? '') . "'\">Chi tiết</button>
+                              </td>";
                                 echo "</tr>";
                             }
                         } else {

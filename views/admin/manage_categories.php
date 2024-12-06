@@ -91,7 +91,6 @@ if (isset($_POST['update_category'])) {
             document.getElementById('deleteModal').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
-
         function closeDeleteModal() {
             document.getElementById('deleteModal').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';

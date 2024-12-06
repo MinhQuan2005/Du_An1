@@ -50,72 +50,27 @@
                 </div>
             </div>
 
-            <div class="banner-container">
-                <div class="slides">
-                    <div class="slide" style="background-image: url('./uploads/banner1.jpg')"></div>
-                    <div class="slide" style="background-image: url('./uploads/banner2.jpg')"></div>
-                    <div class="slide" style="background-image: url('./uploads/banner3.jpg')"></div>
-                </div>
-                <button class="nav-button left" onclick="prevSlide()">&#10094;</button>
-                <button class="nav-button right" onclick="nextSlide()">&#10095;</button>
-                <div class="dots">
-                    <div class="dot active" onclick="currentSlide(0)"></div>
-                    <div class="dot" onclick="currentSlide(1)"></div>
-                    <div class="dot" onclick="currentSlide(2)"></div>
-                </div>
-            </div>
+       
         </header>
-        <div id="content">
-            <section class="product-section">
-            <h2 id="top">Sản phẩm nổi bật</h2>
-            <div class="product-list">
-                <?php foreach ($popularProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>" >
-                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?> ₫</p>
-                    </div>
-                <?php endforeach; ?>
+        <?php if (!empty($results)): ?>
+    <section class="product-section">
+        <h2 id="search-results">Kết quả tìm kiếm cho: "<?php echo htmlspecialchars($search); ?>"</h2>
+        <div class="product-list">
+            <?php foreach ($results as $product): ?>
+                <div class="product-card">
+                    <a href="index.php?act=detailpro&id=<?php echo $product['products_id']; ?>">
+                        <img src="./uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                        <p><?php echo htmlspecialchars($product['name']); ?></p>
+                        <p><?php echo number_format($product['price'], 0, ',', '.') ?> ₫</p>
+                    </a>
                 </div>
-            </div>
-        </section>
-        <section class="product-section">
-            <h2 id="nam">Nam</h2>
-            <div class="product-list">
-                <?php foreach ($menProducts as  $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?> ₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        <section class="product-section">
-            <h2 id="nu">Nữ</h2>
-            <div class="product-list">
-                <?php foreach ($womenProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?> ₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        <section class="product-section">
-            <h2 id="tre em">Trẻ em</h2>
-            <div class="product-list">
-                <?php foreach ( $kidsProducts as $product) : ?>
-                    <div class="product-card">
-                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
-                        <p><?= number_format($product['price'], 0, ',', '.') ?> ₫</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+            <?php endforeach; ?>
         </div>
+    </section>
+<?php else: ?>
+    <h2>Không tìm thấy sản phẩm nào cho: "<?php echo htmlspecialchars($search); ?>"</h2>
+<?php endif; ?>
+
         <footer id="footer">
             <div class="left-section">
                 <p><b>Địa chỉ: </b>FPT Polytechnic Hà Nội</p>

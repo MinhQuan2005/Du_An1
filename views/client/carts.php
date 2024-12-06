@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng</title>
+    <title>GIỎ HÀNG</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../Du an 1_Nhom 4/css/client/dashboard.css">
 </head>
@@ -18,15 +18,16 @@
     <header id="header">
         <div class="top-header">
             <div class="logo">
-                <img src="./uploads/logo.png" alt="Logo">
+                <a href="index.php?act=home">
+                    <img src="./uploads/logo.png">
+                </a>
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../../../Du an 1_Nhom 4/index.php?act=home">TRANG CHỦ</a></li>
-                    <li><a href="#top">MỚI & NỔI BẬT</a></li>
-                    <li><a href="#nam">NAM</a></li>
-                    <li><a href="#nu">NỮ</a></li>
-                    <li><a href="#tre em">TRẺ EM</a></li>
+                    <li><a href="index.php?act=home">MỚI & NỔI BẬT</a></li>
+                    <li><a href="index.php?act=dmnam">NAM</a></li>
+                    <li><a href="index.php?act=dmnu">NỮ</a></li>
+                    <li><a href="index.php?act=dmtreem">TRẺ EM</a></li>
                 </ul>
             </div>
             <div class="search">
@@ -51,7 +52,7 @@
         </div>
     </header>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Giỏ hàng</h1>
+        <h1 class="text-center mb-4">Giỏ hàng của bạn</h1>
         <form method="post" action="index.php?act=updateCart">
             <table class="table table-bordered">
                 <thead>
@@ -73,10 +74,10 @@
                         $totalPrice += $itemTotalPrice; 
                     ?>
                         <tr>
-                            <td><?= $index + 1 ?></td>
+                        <td><?= $index + 1 ?></td>
                             <td><img src="./uploads/<?= $item['image'] ?>" class="img-fluid" style="width: 100px;"></td>
                             <td><?= $item['name'] ?></td>
-                            <td><?= number_format($item['price'], 0, ',', '.') ?> VND</td>
+                            <td><?= number_format($item['price'], 0, ',', '.') ?> ₫</td>
                             <td>
                                 <input type="number" name="quantity[<?= $item['cart_details_id'] ?>]" 
                                        value="<?= $item['quantity'] ?>" min="1" 
@@ -84,7 +85,7 @@
                                 <input type="hidden" name="cart_details_id[<?= $item['cart_details_id'] ?>]" 
                                        value="<?= $item['cart_details_id'] ?>">
                             </td>
-                            <td><?= number_format($itemTotalPrice, 0, ',', '.') ?> VND</td>
+                            <td><?= number_format($itemTotalPrice, 0, ',', '.') ?> ₫</td>
                             <td>
                                 <a href="index.php?act=deleteFromCart&cart_details_id=<?= $item['cart_details_id'] ?>" 
                                    class="btn btn-danger btn-sm">Xóa</a>
@@ -95,18 +96,18 @@
                 <tfoot>
                     <tr>
                         <td colspan="5" class="text-end"><strong>Tổng tiền:</strong></td>
-                        <td colspan="0"><?= number_format($totalPrice, 0, ',', '.') ?> VND</td>
+                        <td colspan="0"><?= number_format($totalPrice, 0, ',', '.') ?> ₫</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-end"><strong>Phí vận chuyển:</strong></td>
-                        <td colspan="0">30,000 VND</td>
+                        <td colspan="0">30,000 ₫</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-end"><strong>Tổng thanh toán:</strong></td>
                         <td colspan="0" style="color: #d9534f; font-size: 1.2rem;">
-                            <strong><?= number_format($totalPrice + 30000, 0, ',', '.') ?> VND</strong>
+                            <strong><?= number_format($totalPrice + 30000, 0, ',', '.') ?> ₫</strong>
                         </td>
                         <td>
                             <button type="submit" class="btn btn-success">Cập nhật</button>
@@ -117,7 +118,7 @@
             <div class="d-flex justify-content-between">
                 <a href="index.php?act=home" class="btn btn-secondary">Tiếp tục mua sắm</a>
                 <a href="index.php?act=checkout" class="btn btn-secondary">Đặt hàng</a>
-            </div>
+                </div>
         </form>
     </div>
     <footer id="footer" class="mt-5">
@@ -127,7 +128,7 @@
             <p><b>Email:</b> contact@nhom4.com</p>
         </div>
         <div class="right-section">
-            <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
+        <p>Copyright <b>&copy;</b> Dự án 1 by Nhóm 4</p>
             <p><b>Chính sách bảo mật | Điều khoản sử dụng</b></p>
         </div>
     </footer>
