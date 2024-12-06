@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categories_id = $_POST['categories_id'];
     $description = $_POST['description'];
     $status = $_POST['status'];
-    $image = $_FILES['image']['name'];
-    $image_tmp = $_FILES['image']['tmp_name'];
+    $image = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : null;
+    $image_tmp = isset($_FILES['image']['tmp_name']) ? $_FILES['image']['tmp_name'] : null;
 
     $views = 0;
 

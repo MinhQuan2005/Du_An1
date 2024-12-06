@@ -6,7 +6,6 @@ $error = '';
 $success = '';
 
 // Thêm
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['update_category'])) {
     $name = $_POST['name'];
 
@@ -92,7 +91,6 @@ if (isset($_POST['update_category'])) {
             document.getElementById('deleteModal').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
-
         function closeDeleteModal() {
             document.getElementById('deleteModal').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';

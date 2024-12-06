@@ -16,7 +16,7 @@ class CartModel {
     }
 
     public function getCartItems($userId) {
-        $sql = "SELECT cd.cart_details_id, p.name, p.price, p.image, cd.quantity 
+        $sql = "SELECT cd.cart_details_id, p.name, p.products_id, p.price, p.image, cd.quantity 
                 FROM cart_details cd
                 JOIN products p ON cd.products_id = p.products_id
                 WHERE cd.carts_id = (SELECT carts_id FROM carts WHERE users_id = ?)";
@@ -57,6 +57,12 @@ class CartModel {
             return $this->db->insert_id;
         }
         return $cart['carts_id'];
+    }
+    public function clearCart($userId) {
+        $sql = "DELETE FROM cart_details WHERE carts_id = (SELECT carts_id FROM carts WHERE users_id = ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
     }
 }
 ?>

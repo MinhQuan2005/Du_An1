@@ -161,7 +161,7 @@ $result = $stmt->get_result();
                 <option value="Đã xử lý">Đã xử lý</option>
                 <option value="Đã giao hàng">Đã giao hàng</option>
                 <option value="Đã giao thành công">Đã giao thành công</option>
-                <option value="Đã huỷ">Đã huỷ</option>
+                <option value="Đã huỷ">Đã hủy</option>
             </select><br><br>
             <button type="button" onclick="closeModal()">Đóng</button>
             <button type="submit" name="update_status">Lưu</button>

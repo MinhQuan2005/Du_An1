@@ -10,7 +10,9 @@
 <header id="header">
             <div class="top-header">
                 <div class="logo">
-                    <img src="./uploads/logo.png" alt="">
+                    <a href="index.php?act=home">
+                        <img src="./uploads/logo.png">
+                    </a>
                 </div>
                 <div class="menu">
                     <ul>
@@ -22,19 +24,26 @@
                     </ul>
                 </div>
                 <div class="search">
-                    <form>
-                        <input type="text" placeholder="Nhập thông tin..." required>
-                        <button>Tìm kiếm</button>
-                    </form>
+                              <form action="index.php" method="GET">
+    <input type="hidden" name="act" value="search"> <!-- Giữ tham số act -->
+    <input type="text" name="query" placeholder="Nhập thông tin..." required>
+    <button type="submit">Tìm kiếm</button>
+</form>
+
                 </div>
                 <div class="account">
-                    <?php if(isset($_SESSION['user']['username'])) : ?>
-                        <span>Chào, <?php echo $_SESSION['user']['username']; ?></span>
+
+                <?php if(isset($_SESSION['user']['username'])) : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
+                        <a style="background-color: #141414;
+    color: white; padding: .8rem; border-radius: .3rem;" class="butt" href="index.php?act=orderHistory">Đơn hàng</a>
                         <form action="index.php?act=logout" method="POST">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     <?php else : ?>
+                        <button class="butt" type="submit"><a href="index.php?act=cart">🛒</a></button>
                         <a href="account/login.php"><button>Đăng nhập</button></a>
+                        
                     <?php endif; ?>
                 </div>
             </div>
@@ -54,21 +63,19 @@
                 </div>
             </div>
         </header>
-    <h1>Sản phẩm dành cho Trẻ Em</h1>
-    <div class="product-list">
-        <?php if (!empty($kidsProducts)): ?>
-            <?php foreach ($kidsProducts as $product): ?>
-                <div class="product-card">
-                    <img src="./uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                    <p><?php echo htmlspecialchars($product['name']); ?></p>
-                    <p><?php echo number_format($product['price'], 0, ',', '.'); ?>₫</p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Không có sản phẩm nào.</p>
-        <?php endif; ?>
-    </div>
-    <footer id="footer">
+        <section class="product-section">
+            <h2 id="tre em">Trẻ em</h2>
+            <div class="product-list">
+                <?php foreach ( $kidsProducts as $product) : ?>
+                    <div class="product-card">
+                        <img src="./uploads/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        <p><a href="../../../Du an 1_Nhom 4/index.php?act=detailpro&id=<?= $product['products_id'] ?>"><?= $product['name'] ?></a></p>
+                        <p><?= number_format($product['price'], 0, ',', '.') ?> ₫</p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <footer id="footer">
             <div class="left-section">
                 <p><b>Địa chỉ: </b>FPT Polytechnic Hà Nội</p>
                 <p><b>Hotline: </b>+212244314</p>
@@ -81,4 +88,20 @@
         </footer>
     </div>
 </body>
+<style>
+    .product-card a {
+        display: block;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 8px;
+        transition: color 0.3s ease;
+    }
+
+    .product-card a:hover {
+        color: #ff6600;
+        text-decoration: none;
+    }
+</style>
 </html>

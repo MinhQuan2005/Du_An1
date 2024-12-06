@@ -39,7 +39,7 @@ class ProductModel {
     public function getBySearch($search) {
         // Sử dụng dấu hỏi (?) thay vì :search
         $query = "SELECT * FROM products WHERE name LIKE ?";
-        $stmt = $this->db->prepare($query);
+        $stmt = $this->conn->prepare($query);
         
         // Liên kết tham số với dấu hỏi (?)
         $searchParam = "%" . $search . "%";
